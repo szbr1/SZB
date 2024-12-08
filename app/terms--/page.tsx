@@ -1,105 +1,86 @@
-"use client"
-// pages/terms-and-conditions.tsx
-import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+// pages/terms.tsx
+"use client";
+import { motion } from "framer-motion";
 
 const TermsAndConditions = () => {
-  const [complaint, setComplaint] = useState('');
-  const [showSuccess, setShowSuccess] = useState(false);
-  const formRef = useRef(null);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    gsap.to(formRef.current, {
-      y: -10,
-      duration: 0.2,
-      onComplete: () => {
-        gsap.to(formRef.current, {
-          y: 0,
-          duration: 0.2
-        });
-      }
-    });
-    
-    localStorage.setItem('userComplaint', complaint);
-    setShowSuccess(true);
-    setComplaint('');
-  };
-
   return (
-    <div className="min-h-screen bg-[#0a0c1b] py-12 px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-3xl mx-auto mt-5 bg-[#161827] rounded-xl shadow-2xl border border-[#2a2d3d]"
-      >
-        <div className="p-8">
-          <h1 className="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-            Terms & Conditions - Instant Cashback
+    <div className="min-h-screen bg-slate-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mt-8 mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-slate-800 rounded-lg shadow-xl p-8"
+        >
+          <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
+            Terms and Conditions
           </h1>
-          
-          <div className="prose prose-invert prose-lg text-gray-300 mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-100">Cashback Terms</h2>
-            <p className="leading-relaxed">
-              1. Instant cashback is subject to proper transaction verification.
-              2. Cashback will be processed within 24-48 hours of eligible purchases.
-              3. Maximum cashback amount is limited to $100 per transaction.
-            </p>
-          </div>
 
-          <motion.div 
-            ref={formRef}
-            className="bg-[#1c1e2e] p-6 rounded-lg border border-[#2a2d3d]"
-          >
-            <h2 className="text-xl font-semibold mb-4 text-gray-100">Submit Your Complaint</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  className="mt-1 block w-full rounded-md bg-[#13141f] border-[#2a2d3d] text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+          {/* Satisfaction Guarantee Section */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+              Customer Satisfaction Guarantee
+            </h2>
+            <div className="text-slate-300 space-y-3">
+              <p>• 100% Money-Back Guarantee within 24 hours of purchase if service is not working</p>
+              <p>• Instant account replacement for any technical issues within first 7 days</p>
+              <p>• 24/7 Customer support via WhatsApp</p>
+              <p>• Free guidance and setup support</p>
+            </div>
+          </section>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-300">
-                  Complaint Details
-                </label>
-                <textarea
-                  value={complaint}
-                  onChange={(e) => setComplaint(e.target.value)}
-                  rows={4}
-                  className="mt-1 block w-full rounded-md bg-[#13141f] border-[#2a2d3d] text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+          {/* Service Terms */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+              Service Terms
+            </h2>
+            <div className="text-slate-300 space-y-3">
+              <p>• All subscriptions are provided on an as-is basis</p>
+              <p>• Account sharing is not permitted unless specified</p>
+              <p>• Subscription duration starts from the day of account delivery</p>
+              <p>• We reserve the right to modify service terms with prior notice</p>
+            </div>
+          </section>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-200"
-                type="submit"
-              >
-                Submit Complaint
-              </motion.button>
-            </form>
+          {/* Privacy Policy */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+              Privacy Policy
+            </h2>
+            <div className="text-slate-300 space-y-3">
+              <p>• We collect only essential information needed for order processing</p>
+              <p>• Your contact information is used solely for order communication</p>
+              <p>• We never share your personal information with third parties</p>
+              <p>• Payment information is processed through secure channels</p>
+            </div>
+          </section>
 
-            {showSuccess && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-4 p-4 bg-[#162032] text-emerald-400 rounded-md border border-emerald-500/20"
-              >
-                Thank you for your feedback! Your complaint has been submitted successfully.
-              </motion.div>
-            )}
-          </motion.div>
-        </div>
-      </motion.div>
+          {/* Refund Policy */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+              Refund Policy
+            </h2>
+            <div className="text-slate-300 space-y-3">
+              <p>• Full refund available within 24 hours if service is non-functional</p>
+              <p>• Refund requests must be submitted via WhatsApp support</p>
+              <p>• Refund processing time: 2-3 business days</p>
+              <p>• Refunds are processed through original payment method</p>
+            </div>
+          </section>
+
+          {/* Contact Information */}
+          <section>
+            <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+              Contact Us
+            </h2>
+            <div className="text-slate-300 space-y-3">
+              <p>For any queries or support:</p>
+              <p>• WhatsApp: +92 301 7164110</p>
+              <p>• Support Hours: 24/7</p>
+              <p>• Response Time: Within 1 hour</p>
+            </div>
+          </section>
+        </motion.div>
+      </div>
     </div>
   );
 };

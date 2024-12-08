@@ -8,10 +8,7 @@ import Navbar from './Navbar/page';
 const inter = Inter({ subsets: ['latin'] });
 
 // Create theme context
-export const ThemeContext = createContext({
-  theme: 'light',
-  toggleTheme: () => {},
-});
+
 
 export default function RootLayout({
   children,
@@ -39,9 +36,8 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen transition-colors duration-300 
         ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
           <Navbar />
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
           {children}
-        </ThemeContext.Provider>
+        
       </body>
     </html>
   );

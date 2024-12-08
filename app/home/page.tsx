@@ -155,11 +155,14 @@ const PurchaseModal: React.FC<ModalProps> = ({ isOpen, product, onClose }) => {
 };
 
 const HomePage = () => {
+  // ... other states
+  const [visibleProducts, setVisibleProducts] = useState(8);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHowToOrderModalOpen, setIsHowToOrderModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(false); // State for loading
+  const [loading, setLoading] = useState(false);
+
 
   const products: Product[] = [
     {
@@ -215,7 +218,7 @@ const HomePage = () => {
       },
     },
     {
-      id: 4,
+      id: 5,
       name: "Netflix",
       originalPrice: 20,
       discountedPrice: 7,
@@ -228,7 +231,7 @@ const HomePage = () => {
       },
     },
     {
-      id: 4,
+      id: 6,
       name: "Netflix",
       originalPrice: 20,
       discountedPrice: 7,
@@ -241,7 +244,7 @@ const HomePage = () => {
       },
     },
     {
-      id: 4,
+      id: 7,
       name: "Netflix",
       originalPrice: 20,
       discountedPrice: 7,
@@ -254,7 +257,7 @@ const HomePage = () => {
       },
     },
     {
-      id: 4,
+      id: 8,
       name: "Netflix",
       originalPrice: 20,
       discountedPrice: 7,
@@ -267,7 +270,7 @@ const HomePage = () => {
       },
     },
     {
-      id: 4,
+      id: 9,
       name: "Netflix",
       originalPrice: 20,
       discountedPrice: 7,
@@ -280,7 +283,7 @@ const HomePage = () => {
       },
     },
     {
-      id: 4,
+      id: 10,
       name: "Netflix",
       originalPrice: 20,
       discountedPrice: 7,
@@ -292,71 +295,7 @@ const HomePage = () => {
         US: { "1 Month": 8, "3 Months": 22, "6 Months": 40, "12 Months": 80, currency: "$" },
       },
     },
-    {
-      id: 4,
-      name: "Netflix",
-      originalPrice: 20,
-      discountedPrice: 7,
-      icon: <SiNetflix className="text-5xl text-red-600" />,
-      description: "Stream your favorite movies and shows",
-      prices: {
-        PK: { "1 Month": "1000-/ PKR ", "3 Months": "2800-/ PKR", "6 Months": "5200-/ PKR", "12 Months": 10000, currency: "PKR" },
-        UK: { "1 Month": "4$", "3 Months": "£10", "6 Months": 30, "12 Months": 55, currency: "£" },
-        US: { "1 Month": 8, "3 Months": 22, "6 Months": 40, "12 Months": 80, currency: "$" },
-      },
-    },
-    {
-      id: 4,
-      name: "Netflix",
-      originalPrice: 20,
-      discountedPrice: 7,
-      icon: <SiNetflix className="text-5xl text-red-600" />,
-      description: "Stream your favorite movies and shows",
-      prices: {
-        PK: { "1 Month": "1000-/ PKR ", "3 Months": "2800-/ PKR", "6 Months": "5200-/ PKR", "12 Months": 10000, currency: "PKR" },
-        UK: { "1 Month": "4$", "3 Months": "£10", "6 Months": 30, "12 Months": 55, currency: "£" },
-        US: { "1 Month": 8, "3 Months": 22, "6 Months": 40, "12 Months": 80, currency: "$" },
-      },
-    },
-    {
-      id: 4,
-      name: "Netflix",
-      originalPrice: 20,
-      discountedPrice: 7,
-      icon: <SiNetflix className="text-5xl text-red-600" />,
-      description: "Stream your favorite movies and shows",
-      prices: {
-        PK: { "1 Month": "1000-/ PKR ", "3 Months": "2800-/ PKR", "6 Months": "5200-/ PKR", "12 Months": 10000, currency: "PKR" },
-        UK: { "1 Month": "4$", "3 Months": "£10", "6 Months": 30, "12 Months": 55, currency: "£" },
-        US: { "1 Month": 8, "3 Months": 22, "6 Months": 40, "12 Months": 80, currency: "$" },
-      },
-    },
-    {
-      id: 4,
-      name: "Netflix",
-      originalPrice: 20,
-      discountedPrice: 7,
-      icon: <SiNetflix className="text-5xl text-red-600" />,
-      description: "Stream your favorite movies and shows",
-      prices: {
-        PK: { "1 Month": "1000-/ PKR ", "3 Months": "2800-/ PKR", "6 Months": "5200-/ PKR", "12 Months": 10000, currency: "PKR" },
-        UK: { "1 Month": "4$", "3 Months": "£10", "6 Months": 30, "12 Months": 55, currency: "£" },
-        US: { "1 Month": 8, "3 Months": 22, "6 Months": 40, "12 Months": 80, currency: "$" },
-      },
-    },
-    {
-      id: 4,
-      name: "Netflix",
-      originalPrice: 20,
-      discountedPrice: 7,
-      icon: <SiNetflix className="text-5xl text-red-600" />,
-      description: "Stream your favorite movies and shows",
-      prices: {
-        PK: { "1 Month": "1000-/ PKR ", "3 Months": "2800-/ PKR", "6 Months": "5200-/ PKR", "12 Months": 10000, currency: "PKR" },
-        UK: { "1 Month": "4$", "3 Months": "£10", "6 Months": 30, "12 Months": 55, currency: "£" },
-        US: { "1 Month": 8, "3 Months": 22, "6 Months": 40, "12 Months": 80, currency: "$" },
-      },
-    },
+
   ];
 
   useEffect(() => {
@@ -368,15 +307,30 @@ const HomePage = () => {
   }, []);
 
   const handleSearch = () => {
-    setLoading(true); // Set loading to true when the search is triggered
+    setLoading(true);
+    // Blur/deselect the search input
+    document.activeElement instanceof HTMLElement && document.activeElement.blur();
+    
     setTimeout(() => {
-      setLoading(false); // Reset loading after search is done (you can replace this with your actual search logic)
-    }, 1000); // Example delay
+      setLoading(false);
+    }, 1000);
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts = products.filter((product) => {
+    const searchTerm = searchQuery.toLowerCase().trim();
+    const productName = product.name.toLowerCase();
+    if (productName === searchTerm) {
+      return true;
+    }
+    
+    // Then partial matches if no exact match
+    if (searchTerm.length > 0) {
+      return productName.startsWith(searchTerm);
+    }
+    
+    // Show all products if search is empty
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-slate-900 mt-4">
@@ -394,37 +348,57 @@ const HomePage = () => {
         >
           How to Order
         </button>
-        <div className="mt-4 relative">
-          <input
-            type="text"
-            className="w-full p-3 pl-12 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Search Products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch(); // Trigger search on Enter key press
-              }
-            }}
-          />
-          <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          {loading && (
-            <FiLoader className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 animate-spin" />
-          )}
-        </div>
+        
+<div className="mt-4 relative">
+<input
+  type="text"
+  className="w-full p-3 pl-12 pr-12 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+  placeholder="Search Products..."
+  value={searchQuery}
+  onChange={(e) => {
+    setSearchQuery(e.target.value);
+    setVisibleProducts(8);
+  }}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  }}
+/>
+  <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+  {loading && (
+    <FiLoader className="absolute right-12 text-gray-400 animate-spin" />
+  )}
+  {searchQuery && (
+    <button
+      onClick={() => {
+        setSearchQuery("");
+        setVisibleProducts(8);
+      }}
+      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200"
+    >
+      <FiX />
+    </button>
+  )}
+</div>
+
 
         
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <motion.div
-                key={product.id}
-                className="product-card h-full flex flex-col bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
+   
+
+<div className="max-w-7xl mx-auto px-4 pb-16">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {filteredProducts.length > 0 ? (
+      filteredProducts
+        .slice(0, visibleProducts)
+        .map((product) => (
+          <motion.div
+            key={product.id}
+            className="product-card h-full flex flex-col bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            whileHover={{ y: -5, transition: { duration: 0.2 } }}
+          >
                 <div className="p-6 flex-grow flex flex-col">
                   <div className="flex justify-center items-center h-16 mb-4">
                     {product.icon}
@@ -447,6 +421,17 @@ const HomePage = () => {
             <p className="text-center text-white text-xl">No products found matching your search</p>
           )}
         </div>
+         {/* See More Button */}
+  {filteredProducts.length > visibleProducts && (
+    <div className="text-center mt-8">
+      <button
+        onClick={() => setVisibleProducts(prev => prev + 8)}
+        className="bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold py-2 px-6 transition-all duration-300"
+      >
+        See More
+      </button>
+    </div>
+  )}
       </div>
 
       <PurchaseModal

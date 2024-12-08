@@ -1,11 +1,8 @@
-import { div } from "framer-motion/client";
+
 import ContactSection from "./contacts/page";
 import Footer from "./footer/page";
 import HomePage from "./home/page";
 import InfoPage from "./info/page";
-import Navbar from "./Navbar/page";
-
-import Reviews from "./review/page";
 import Products from "./review/page";
 
 
@@ -17,9 +14,7 @@ export default function Home() {
   <br />
   
 <HomePage />
-
 <Products />
-
 <InfoPage />
 <ContactSection />
 <Footer />
