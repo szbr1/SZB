@@ -1,138 +1,224 @@
 "use client"
-import { motion, AnimatePresence } from 'framer-motion';
-
-
-import { FaStar, FaQuoteLeft, FaUserCircle } from 'react-icons/fa';
-import { MdVerified } from 'react-icons/md';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { 
+  FaQuoteLeft, 
+  FaStar, 
+  FaAward, 
+  FaShieldAlt, 
+  FaCrown,
+  FaUserTie 
+} from 'react-icons/fa';
+import { SiNetflix, SiOpenai } from 'react-icons/si';
+import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 
-const ReviewsPage = () => {
-  const titleRef = useRef(null);
-  const reviews = [
+gsap.registerPlugin(ScrollTrigger);
+
+interface ReviewData {
+  id: number;
+  name: string;
+  role: string;
+  company: string;
+  review: string;
+  rating: number;
+}
+
+interface CertificationData {
+  id: number;
+  name: string;
+  issuer: string;
+  year: string;
+  icon: React.ReactNode;
+}
+
+const Certifications: React.FC = () => {
+  const certifications: CertificationData[] = [
     {
       id: 1,
-      name: "Sarah Johnson",
-      isGolden: true,
-      rating: 5,
-      position: "CEO, Tech Innovations",
-      comment: "Absolutely life-changing subscription! The best investment I've made this year. The customer service is outstanding and the features are amazing.",
-      avatar: "/avatars/sarah.jpg",
-      date: "December 2023"
+      name: "Best Streaming Platform",
+      issuer: "Digital Innovation Awards",
+      year: "2023",
+      icon: <FaCrown className="w-8 h-8 text-amber-500" />,
     },
     {
       id: 2,
-      name: "Mike Peters",
-      rating: 4,
-      position: "Senior Developer",
-      comment: "Really impressed with the quality. Would definitely recommend to others!",
-      avatar: "/avatars/mike.jpg",
-      date: "November 2023"
+      name: "Security Excellence",
+      issuer: "Cyber Security Standards",
+      year: "2023",
+      icon: <FaShieldAlt className="w-8 h-8 text-amber-500" />,
     },
-    // Add more reviews here
+    {
+      id: 3,
+      name: "AI Innovation Award",
+      issuer: "Tech Excellence Awards",
+      year: "2023",
+      icon: <FaAward className="w-8 h-8 text-amber-500" />,
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="mt-32 max-w-7xl mx-auto"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+        Our Achievements & Recognition
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {certifications.map((cert) => (
+          <motion.div
+            key={cert.id}
+            className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center">
+                {cert.icon}
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold text-white text-center mb-2">
+              {cert.name}
+            </h3>
+            <p className="text-slate-400 text-center mb-2">{cert.issuer}</p>
+            <p className="text-amber-500 text-sm text-center">
+              Awarded {cert.year}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+const Reviews: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  
+  const reviews: ReviewData[] = [
+    {
+      id: 1,
+      name: "Reed Hastings",
+      role: "CEO",
+      company: "Streaming Giant",
+      review: "This platform has revolutionized how we think about content streaming and AI tools bundling. It's the future of digital entertainment.",
+      rating: 5,
+    },
+    {
+      id: 2,
+      name: "Sarah Johnson",
+      role: "Content Creator",
+      company: "Digital Studios",
+      review: "The AI tools integration with streaming services is groundbreaking. It's changed how we create and consume content.",
+      rating: 5,
+    },
+    {
+      id: 3,
+      name: "Michael Chen",
+      role: "Tech Director",
+      company: "AI Solutions",
+      review: "Finally, a platform that combines premium streaming with cutting-edge AI tools. Exactly what the market needed.",
+      rating: 5,
+    },
   ];
 
   useEffect(() => {
-    gsap.from(titleRef.current, {
-      duration: 1.5,
-      y: -100,
-      opacity: 0,
-      ease: "elastic.out(1, 0.3)",
-    });
+    const section = sectionRef.current;
+    
+    gsap.fromTo(
+      '.review-card',
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top center+=100',
+          end: 'bottom center',
+          toggleActions: 'play none none reverse',
+        },
+      }
+    );
   }, []);
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    })
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-16 px-4">
-      <div className="max-w-7xl mx-auto">
-        <motion.h1 
-          ref={titleRef}
-          className="text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-400 mb-16"
-        >
-          Customer Testimonials
-        </motion.h1>
+    <div ref={sectionRef} className="min-h-screen bg-slate-900 py-20 px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-20"
+      >
+        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          What Our Users Say
+        </h1>
+        <div className="w-24 h-1 bg-amber-500 mx-auto"></div>
+      </motion.div>
 
-        {/* Golden Review */}
-        <AnimatePresence>
-          {reviews.filter(review => review.isGolden).map(goldenReview => (
-            <motion.div
-              key={goldenReview.id}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mb-20"
-            >
-              <div className="relative p-8 rounded-2xl bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 shadow-[0_0_40px_rgba(255,215,0,0.3)]">
-                <FaQuoteLeft className="absolute -top-6 left-8 text-4xl text-yellow-600" />
-                <div className="flex items-center gap-6 mb-6">
-                  <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-yellow-600 shadow-xl">
-                    <img src={goldenReview.avatar} alt={goldenReview.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-2xl font-bold text-yellow-900">{goldenReview.name}</h3>
-                      <MdVerified className="text-yellow-600 text-xl" />
-                    </div>
-                    <p className="text-yellow-800">{goldenReview.position}</p>
-                    <div className="flex gap-1 mt-1">
-                      {[...Array(goldenReview.rating)].map((_, i) => (
-                        <FaStar key={i} className="text-yellow-600" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-yellow-900 italic text-xl leading-relaxed">{goldenReview.comment}</p>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-
-        {/* Regular Reviews Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviews.filter(review => !review.isGolden).map((review, index) => (
-            <motion.div
-              key={review.id}
-              custom={index}
-              initial="hidden"
-              animate="visible"
-              variants={cardVariants}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-purple-500">
-                  <img src={review.avatar} alt={review.name} className="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white">{review.name}</h3>
-                  <p className="text-purple-300 text-sm">{review.position}</p>
-                  <div className="flex gap-1 mt-1">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <FaStar key={i} className="text-yellow-400 text-sm" />
-                    ))}
-                  </div>
-                </div>
-                <span className="ml-auto text-sm text-purple-300">{review.date}</span>
-              </div>
-              <p className="text-gray-300">{review.comment}</p>
-            </motion.div>
-          ))}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="max-w-4xl mx-auto mb-20 p-8 bg-gradient-to-r from-amber-500/10 to-amber-600/10 rounded-2xl border border-amber-500/20 backdrop-blur-sm"
+      >
+        <BiSolidQuoteAltLeft className="text-6xl text-amber-500 mb-6" />
+        <p className="text-2xl md:text-3xl text-amber-500 font-light italic mb-8">
+          "The perfect blend of streaming and AI tools. This platform is revolutionizing how we experience digital content and productivity."
+        </p>
+        <div className="flex items-center justify-end">
+          <div className="text-right">
+            <h3 className="text-white text-xl font-bold">Sam Anderson</h3>
+            <p className="text-slate-400">CEO, Tech Innovators</p>
+          </div>
+          <div className="ml-4 p-2 bg10 rounded-full">
+            <FaUserTie className="w-12 h-12 text-amber-500" />
+          </div>
         </div>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {reviews.map((review) => (
+          <motion.div
+            key={review.id}
+            className="review-card bg-slate-800 p-6 rounded-xl hover:shadow-xl hover:shadow-slate-700/20 transition-all duration-300"
+            whileHover={{ y: -10 }}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <FaQuoteLeft className="text-2xl text-slate-600" />
+              <div className="flex">
+                {[...Array(review.rating)].map((_, i) => (
+                  <FaStar key={i} className="text-amber-500" />
+                ))}
+              </div>
+            </div>
+            <p className="text-slate-300 mb-6">{review.review}</p>
+            <div className="flex items-center">
+              <div className="p-2 bg-slate-700 rounded-full">
+                <FaUserTie className="w-8 h-8 text-amber-500" />
+              </div>
+              <div className="ml-4">
+                <h3 className="text-white font-semibold">{review.name}</h3>
+                <p className="text-slate-400 text-sm">
+                  {review.role} at {review.company}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
+
+      <Certifications />
     </div>
   );
 };
 
-export default ReviewsPage;
+export default Reviews;

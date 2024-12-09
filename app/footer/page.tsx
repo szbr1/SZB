@@ -17,7 +17,7 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
             >
-              Develop<span className="text-emerald-400 text-sm" >.ts</span> AS
+              Develop<span className="text-emerald-400 text-sm" >.ts</span>
             </motion.h2>
             <p className="text-slate-400 mb-4">
               Premium subscriptions at unbeatable prices. Quality service guaranteed.
@@ -38,19 +38,19 @@ const Footer = () => {
                 whileHover={{ x: 5 }}
                 className="hover:text-blue-400 transition-colors"
               >
-                <a href="/terms">Terms of Service</a>
+                <a href="/website/terms--">Terms & Policies</a>
               </motion.li>
               <motion.li 
                 whileHover={{ x: 5 }}
                 className="hover:text-blue-400 transition-colors"
               >
-                <a href="/privacy">Privacy Policy</a>
+                <a href="/website/about">Privacy Policy</a>
               </motion.li>
               <motion.li 
                 whileHover={{ x: 5 }}
                 className="hover:text-blue-400 transition-colors"
               >
-                <a href="/faq">FAQ</a>
+                <a href="/website/reviews">Reviews</a>
               </motion.li>
             </ul>
           </div>

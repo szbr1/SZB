@@ -309,8 +309,10 @@ const HomePage = () => {
   const handleSearch = () => {
     setLoading(true);
     // Blur/deselect the search input
-    document.activeElement instanceof HTMLElement && document.activeElement.blur();
-    
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     setTimeout(() => {
       setLoading(false);
     }, 1000);
