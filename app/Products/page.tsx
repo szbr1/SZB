@@ -5,6 +5,8 @@ import { SiNetflix } from "react-icons/si";
 import { FaSpotify } from "react-icons/fa";
 import { TbBrandDisney } from "react-icons/tb";
 import { FaGoogleWallet } from "react-icons/fa";
+import { FiX } from "react-icons/fi";
+
 
 
 const Products = () => {
@@ -35,10 +37,10 @@ const Products = () => {
   const products = [
     {
       id: 1,
-      name: "Netflix Premium",
-      icon: <TbBrandDisney className="text-5xl text-purple-500" />,
-      description: "Watch unlimited movies and TV shows in Ultra HD",
-      basePrice: 1000,
+      name: "Disney",
+      icon: <TbBrandDisney className="text-5xl text-disney-blue" />,
+      description: "Unlock the magic of Disney with endless movies, shows, and unforgettable moments, all at an affordable price!",
+      basePrice: 800,
     },
     {
       id: 2,
@@ -113,16 +115,17 @@ const Products = () => {
     const product = products[currentIndex];
     const currency = getCurrencySymbol(selectedCountry);
     const message = `
-*Product Details*%0A
--------------------------%0A
-Product: *${product.name}*%0A
-Duration: *${selectedMonths} month(s)*%0A
-Country: *${selectedCountry}*%0A
-Price: *${currency} ${price}*%0A
--------------------------%0A
-    `;
+  *Product Details*%0A
+  -------------------------%0A
+  Product: *${product.name}*%0A
+  Duration: *${selectedMonths} month(s)*%0A
+  Country: *${selectedCountry}*%0A
+  Price: *${currency} ${price}*%0A
+  -------------------------%0A
+  `;
     window.open(`https://wa.me/+923179393471?text=${message}`, "_blank");
   };
+  
 ///////////
 //////////
 /////////
@@ -180,6 +183,7 @@ Price: *${currency} ${price}*%0A
 <div className="block md:hidden">
   <br />
   <br />
+  
 </div>
 
 
@@ -202,7 +206,13 @@ Price: *${currency} ${price}*%0A
 
         {showPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-            <div className="bg-slate-900 text-white rounded-lg p-6 max-w-md w-full">
+    <div className="bg-slate-900 text-white rounded-lg p-6 max-w-md w-full relative">
+            <button
+        onClick={() => setShowPopup(false)}
+        className="absolute top-3 right-3 p-2 rounded-full bg-slate-700 hover:bg-slate-600"
+      >
+        <FiX className="text-lg text-slate-400" />
+      </button>
               <h3 className="text-xl font-bold mb-4">
                 {products[currentIndex].name}
               </h3>

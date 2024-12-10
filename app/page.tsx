@@ -1,9 +1,8 @@
 
-import ContactSection from "./contacts/page";
-import Footer from "./footer/page";
+import ContactSection from "./Complain/page";
 import HomePage from "./home/page";
-import InfoPage from "./info/page";
-import Products from "./review/page";
+import InfoPage from "./Payment/page";
+import Products from "./Products/page";
 
 
 export default function Home() {
@@ -17,7 +16,6 @@ export default function Home() {
 <Products />
 <InfoPage />
 <ContactSection />
-<Footer />
 
   </div>
   );

@@ -101,26 +101,26 @@ const Reviews: React.FC = () => {
   const reviews: ReviewData[] = [
     {
       id: 1,
-      name: "Reed Hastings",
+      name: "Habib ",
       role: "CEO",
       company: "Streaming Giant",
-      review: "This platform has revolutionized how we think about content streaming and AI tools bundling. It's the future of digital entertainment.",
+      review: "I’ve been looking for affordable subscriptions, and this is by far the cheapest I’ve found! I got YouTube and Netflix Premium at an unbeatable price. Highly recommend for anyone on a budget!",
       rating: 5,
     },
     {
       id: 2,
-      name: "Sarah Johnson",
+      name: "Jolson US",
       role: "Content Creator",
       company: "Digital Studios",
-      review: "The AI tools integration with streaming services is groundbreaking. It's changed how we create and consume content.",
+      review: "Great value for the price. I’ve been using this for a few months now, and I haven't faced any issues. The only downside is that sometimes the app lags on my older device.",
       rating: 5,
     },
     {
       id: 3,
-      name: "Michael Chen",
+      name: "Hamza Rohail",
       role: "Tech Director",
       company: "AI Solutions",
-      review: "Finally, a platform that combines premium streaming with cutting-edge AI tools. Exactly what the market needed.",
+      review: "These subscriptions are hands down the cheapest out there. I signed up for Netflix and YouTube Premium, and the prices are amazing for the value you get. Definitely the best deal!",
       rating: 5,
     },
   ];
@@ -172,7 +172,7 @@ const Reviews: React.FC = () => {
       >
         <BiSolidQuoteAltLeft className="text-6xl text-amber-500 mb-6" />
         <p className="text-2xl md:text-3xl text-amber-500 font-light italic mb-8">
-          "The perfect blend of streaming and AI tools. This platform is revolutionizing how we experience digital content and productivity."
+        "This is by far the best subscription I’ve signed up for. I purchased YouTube and Netflix Premium through this service, and the variety of content is awesome. The streaming quality is amazing, and I can access it anywhere. The customer service is top-notch. Highly recommend it!"
         </p>
         <div className="flex items-center justify-end">
           <div className="text-right">
@@ -208,7 +208,7 @@ const Reviews: React.FC = () => {
               <div className="ml-4">
                 <h3 className="text-white font-semibold">{review.name}</h3>
                 <p className="text-slate-400 text-sm">
-                  {review.role} at {review.company}
+                
                 </p>
               </div>
             </div>

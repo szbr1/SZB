@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from './Navbar/page';
+import Footer from "./footer/page";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -37,7 +38,7 @@ export default function RootLayout({
         ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
           <Navbar />
           {children}
-        
+        <Footer />
       </body>
     </html>
   );
