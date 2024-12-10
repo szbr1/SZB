@@ -82,7 +82,7 @@ const PurchaseModal: React.FC<ModalProps> = ({ isOpen, product, onClose }) => {
   const handlePurchase = () => {
     if (selectedCountry && selectedMonths && price !== null) {
       const currency = product.prices[countryKey].currency;
-      const whatsappUrl = `https://wa.me/923017164110?text=
+      const whatsappUrl = `https://wa.me/923179393471?text=
 *Product Details*%0A
 -------------------------%0A
 Product: *${product.name}*%0A
