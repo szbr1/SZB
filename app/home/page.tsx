@@ -6,13 +6,14 @@ import { FaYoutube, FaAmazon, FaSpotify } from "react-icons/fa";
 import { SiNetflix } from "react-icons/si";
 import { FiX, FiSearch, FiLoader } from "react-icons/fi";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { TbBrandDisney } from "react-icons/tb";
 // Product Interface
 interface Product {
   id: number;
   name: string;
   originalPrice: number;
   discountedPrice: number;
-  icon: JSX.Element;
+  icon: JSX.Element ;
   description: string;
   prices: {
     PK: { [duration: string]: any; currency: string };
@@ -253,7 +254,8 @@ const HomePage = () => {
       name: "Amazon Prime",
       originalPrice: 8,
       discountedPrice: 3,
-      icon: <FaAmazon className="text-5xl text-blue-500" />,
+      icon: <FaAmazon className="text-5xl text-green-600" />,
+
       description: "Stream your favorite shows and movies",
       prices: {
         PK: { "1 Month": 380, "3 Months": 1090, "6 Months": 2000, "12 Months": 3600, currency: "PKR" },
@@ -282,8 +284,21 @@ const HomePage = () => {
       icon: <SiNetflix className="text-5xl text-red-600" />,
       description: "Stream your favorite movies and shows",
       prices: {
-        PK: { "1 Month": 550, "3 Months": 1600, "6 Months": 3200, "12 Months": 6000, currency: "PKR" },
+        PK: { "1 Month": 400, "3 Months": 1200, "6 Months": 2300, "12 Months": 400, currency: "PKR" },
         UK: { "1 Month": 4, "3 Months": 10, "6 Months": 30, "12 Months": 55, currency: "£" },
+        US: { "1 Month": 5.50, "3 Months": 13, "6 Months": 40, "12 Months": 73, currency: "$" },
+      },
+    },
+    {
+      id: 5,
+      name: "Dinsney+",
+      originalPrice: 20,
+      discountedPrice: 7,
+      icon: <TbBrandDisney className="text-5xl text-disney-blue" />,
+      description: "Disney+ is a streaming service offering Disney, Pixar, Marvel, Star Wars, and National Geographic content.",
+      prices: {
+        PK: { "1 Month": 600, "3 Months": 1700, "6 Months": 3200, "12 Months": 6000, currency: "PKR" },
+        UK: { "1 Month": 4, "3 Months": 10, "6 Months": 29, "12 Months": 54, currency: "£" },
         US: { "1 Month": 5.50, "3 Months": 13, "6 Months": 40, "12 Months": 73, currency: "$" },
       },
     },
